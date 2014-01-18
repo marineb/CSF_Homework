@@ -1,0 +1,655 @@
+alt + enter if there's something in red in IntelliJ. 
+
+# Statically VS Dynamic languages
+Statically typed language (java, c++, objective c). for all these languages, you have to establish which type of variable you're defining (int n = 2;). Python us a dynamically typed language, like ruby, javascript, etc. 
+
+# to compile java on the terminal. 
+javac nameoffile
+java nameofclass 
+
+# Java Naming Conventions
+Classes are CamelCase
+Packages (grouping of classes) are lower.case separated by dots
+Methodss & Variables are camelCase
+Constants are UPPER_CASE
+
+
+Fact: When a new array is created. All the "int"s are set to 0. 
+
+
+# Arrays in JAVA
+String[] array = new String[10];
+When you create an array, it is fixed. If you want to add range to it, you have to create a new array. You can access easily content in array if we know which element we're looking for. 
+
+int i = array[0];
+gets the first element of your array. 
+
+array[0]=1;
+sets the first element of the array. 
+
+myLength = array.length;
+gets the size of the array. 
+
+
+
+ArrayList<String> arrayList = new ArrayList<>();
+It's a list that backed by an array. [ArrayList](http://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html)
+They can take care of the resizing of an array and other things.  There is an overhead to using the object ArrayList. If your array is unlikely to change, using a plain array is the way to go. You can create an ArrayList of an array of integers, you need to create another ArrayList of strings, etc. It's just a wrapper for the array, again, allowing you to change it's capacity, etc. 
+
+
+(Class III - Dec 11)
+
+If you're modeling a game board, you can have multi dimensional arrays. 
+int+ [][]
+array = new int [5][5];
+array[1][1] // to access the array
+
+When might you use an array:
+- Order is important
+- Data you need to store is fixed-size
+- if you need random access, you know the indexes of each item
+- a contiguous chunk of memory to iterate through
+
+# Version Control
+Styles: server/client type (subversion, perforce, CVS) or distributed type (git, mercurial). 
+
+Keep a stable branch where everything works as expected, do feature work locally (smaller changes) or in a separate branch (big, destructive changes). 
+
+Two models for branching strategy:
+- Branch-per-release model: different branch/tag for each release version. 
+- Trunk & release branch model: release is prod and trunk is active development. 
+
+
+# Code Reviews
+
+How are errors handled?
+How are variables named?
+Are methods/classes too long/complex?
+Is it obvious what's happening in the code? 
+Can you think of a more elegant/efficient solution to the problem?
+
+
+# O programming main principles
+ 
+Inheritance: if an object has a parent class, it inherits all of the methods of the parent classes. When looking at a java documentation, the breadcrumbs show which class inherits which. It's useful. 
+
+Polymorphism: treating one thing like another.
+when you compare 2 value with ==.When it sees raw strings, it strips them out and creates a global table of strings that exists throughout the timeline of the app and creates one reference for each string that exists. so "dogs" == "dogs" is true while new String("dogs") == new String("dogs") is false because 2 different strings were created. So it's now looking at the objects, not at their content. So then in order to compare the content of two strings, you use the method .equals().
+String also has a .equals method. 
+
+
+Encapsulation: know what you need to know, expose only what you need to expose.
+objects are a bundle of functionality. objects should contain only what they need to contain, and only expose what they need to expose. 
+
+
+
+result = 3
+we start at 2. and go though until n. 
+j = 10 ; 
+
+(20-1)+(20*2-10)/2 = 19 + 15
+
+
+git init
+git clone https://github.com/marineb/CSF_Homework.git
+git remote add origin https://github.com/marineb/CSF_Homework.git
+git remote -v
+git remote add upstream https://github.com/generalassembly-studio/CSF_Homework.git
+git remote -v
+origin	https://github.com/marineb/CSF_Homework.git (fetch)
+origin	https://github.com/marineb/CSF_Homework.git (push)
+upstream	https://github.com/generalassembly-studio/CSF_Homework.git (fetch)
+upstream	https://github.com/generalassembly-studio/CSF_Homework.git (push)
+
+
+# OOP Vocabulary Review
+instances/objects: a bundle of behavior (variables( and states (methods)
+method: routine that has access to the state of its object
+class: defines the structure and behavior of an object. 
+
+arrayList, Scanner, Random, arrays are all Classes. 
+
+# OOP
+
+- Having public variables can allow anyone to change them. Exposing it can give control to others. 
+- We write getters and setters to get and set that data instead. 
+- We use "this." to specify that. 
+
+**Encapsulation**
+- Getter/setter methods are a general encapsulation best practice. 
+- Why isn't everything public?
+Stuff changes all the time in code. So you want to reduce the amount of classes you're exposing. So you don't have to change it in too many places when you change one thing in one place. 
+
+The question to ask is: why should this be publicly exposed? Ideally, don't expose. 
+
+In order to set a tiredness level for the dog. Instead of creating an integer within the dog class, it makes more sense to add a variable of the method move(). 
+
+**Object Creation**
+- constructors set up an object when it's created (or "instantiated") Dog dog = new Dog();
+- Constructors can accept parameters. So for instance when creating an arrayList. Instead of using arrayList(), you use arrayList(int initialCapacity) to set the size you need (instead of having the default size). 
+- (Variable can be set on the object outside the constructor, and is expected to be done extremely frequently. )For instance if a dog is always going to have a name. Might as well create the object with the variable in it from the start. For instance:
+
+Dog dog = new Dog("Fido");
+
+instead of 
+Dog dog = new Dog();
+dog.setName("Fido");
+
+Constructors shouldn't be heavy weight operations. 
+In Java, every constructor **must** start with this.
+
+**Inheritance**
+>> Inheritance allows you to define child classes for any given class.
+>> Parent classes don't know anything about their child classes. 
+>> Classes can only have one parent class. 
+>> "super." references the superclass method
+>> "this." keyword reference the current class
+
+public class Pitbull extends Dog {  
+}
+
+This create a sub-class of Dog. 
+
+**Interfaces**
+Something's publicly-exposed methods are called its interface. 
+Java allows you to bundle together method signatures separately from a class with the interface keyword. Classes can say that they meet that interface by using the "implements" keyword (instead of "extends"). 
+The Java interface does not define method implementations, only method signatures. 
+
+Classes can meet different interfaces. 
+
+Unlike class hierarchies, most language allow you to implant multiple interfaces. 
+
+Examples: Map, Collections, List, Queue. 
+
+What is the point of an interface?
+
+
+**Abstract Classes**
+Between an interface and a class. 
+Abstract classes define a combination of implementations and 'abstract' methods which must be implemented by subclasses. 
+
+It will force all the subclasses to have that method.  
+
+**Best Practices**
+Gather requirements:
+ 	>> why does my design need to do now?
+ 	>> what is my design likely to do in the future?
+>> start simple and break things out with inheritance and encapsulation as complexity increases
+>> an over-designed system can be as painful to deal with as an under-designed one
+
+
+# polymorphism
+
+Handle different types of objects with a single uniform interface. 
+
+Can take a few forms:
+>> a method might accept a superclass as a parameter (Ex object)
+>> a method might accept a class that meets an interface as a parameter
+>> example: public boolean equals(Object obj) exists on all objects
+
+"Duck"? type programming / system is different. Look into that. 
+
+- subtype polymorphism means that methods do not need to worry about the various implementations of a class. 
+
+public void walkPet (Moveable pet) {  //all that we can call is what's defined in the interface, here MOverable
+        System.out.println(pet.move());
+    }
+
+The only methods you can call above are the ones that are in the interface.  
+
+Why use polymorphism???
+>> accepting the type you need to work on means that those using your class can pass in subclasses, etc, making your methods more versatiles.
+>> operate on the most generic type that your method needs to work on
+
+Best practice is always to create new classes based on the highest superclass.
+
+
+>> careful! imagine this class:hierarchy: Animal > Dog > Chihuahua.     your class has a method which accepts a Dog. 
+
+>> Encapsulation: Know only what you need to know, expose only what you need to expose. 
+>> Inheritance: the "is a" relationship.
+>> Polyphormism: treating one thing like another. 
+
+Java-isms: _final_ prevents subclasses from overriding a method, _@override_ tells the compiler that you're intending to override a method. 
+
+Interface: a bunch of method signatures. Why use them? You want different classes to have different APIs. 
+
+
+# Review OO Scope & visibility
+
+**Public, private, protected**
+Who can access class variables and methods? 
+>> The class
+>> Something in the sam package
+>> A subclass of the class
+>> The rest of the world
+
+IN Java, visibility is restricted with the public, private & protected keywords:
+>> public: accessible to everything (and in the case of variable, writeable)
+>> protected: accessible by class, subclass & package
+>> default (no keyword): accessible by class, package
+>> private: accessible only by class
+
+Most OO language support some variation on these levels of visibility, though implementations vary. 
+
+In Java, just prefix your methods/instance variables with these keywords.  
+
+A package is a grouping of classes -- To create a package, use the "package" keyword. 
+
+Use "Final" keyword for constants: variables that can only be assigned once.
+private final in offset = 10;
+
+# Scope & Statics
+What belongs to an instance, belongs to a class. 
+
+**Instances and Classes**
+
+Instances methods & variables belong to an instance of a class. 
+>> Each time you create a new class, it keeps it's own copies of its variables
+>> When you change that variable in one class, it doesn't change it in another
+
+Classes methods and variables belong to the class:
+>> These are called static methods/variables
+>> Accessible & shared by all instances of the class
+
+private static final int offset = 10;
+Above, no matter how many instances of this thing are created, the number is never going to be re-assigned a new value. 
+
+When would you use static variables?
+>> Constant variables _final_ can safely be static. They're constant so makes sense to share between all instances rather than creating a new copy of the same thing for each. 
+>> Utility methods which do not require an instance (e.g.: integer, Character, String conversion method)
+>> Singletons (?): single objects that exist in a system (a phone might have a Device class that has a static methods currentDevice(), which returns the current device)
+>> Other methods which might conceptually belong to the class of the object
+>> Bootstrap methods (e.g.: _public static void main()_)
+
+ Common static pitfalls:
+>> You cannot call a method ( _foo();_ ) inside of a static method. In order to do that, you'd have to instantiate a new thing
+			X x = new X();
+			x.foo();
+>> Writeable status state is not a great idea. It's a debugging nightmare. 
+
+Best practices:
+>> Static variables should be constant ( _final_ in Java) 
+>> Static methods are typically one-off getters/utility methods
+>> Avoid sharing writeable state between objects using _static_
+
+# Program Flow & How Objects Are Made
+
+**The Stack & the Heap**
+
+How are objects created?
+>> Your programs are loaded into memory when they're running. 
+>> Things are stored in memory in 4 buckets:
+	>> The stack: roughly a stack of the functions your program is currently executing and their local variables
+	>> The Heap: stores instance variable
+	>> Statics: static variables for your class
+	>> Code: your program's code
+
+[Code]
+[Statics]
+[Stack]
+[Heap]
+
+**The Stack**
+>> Every time a method is called, its local variables are pushed onto the stack along with some other data (e.g.: the calling function)
+>> Easily visualized in the debugger
+>> Stacks are typically fixed-size, small as primitives and object references are very small. That's all they store.
+
+
+**The Heap** 
+>> The heap stores instance variables
+>> In Java, any time you call _new_ it creates a new object on the heap 
+>> Structure not as well-defined as the stack as objects are constantly created/destroyed in possibly hard to predict patterns
+>> Runtimes have complex algorithms for dealing with heap allocation
+>> Why segregate memory into the stack & heap? 
+			>> For quick access. That stack is super predictable. 
+			>> When we compile, we know exactly how much space we'll need. It can organize the stack well. 
+			>> We need something to store these objects that live beyond the function, that might be user data. So this stuff can stay around, whereas the stack is for temp data. 
+			>> RRRR: at compile time, we know exactly how much memory...... 
+
+**The Stack & The Heap**
+Why does it matter?
+>> Heap space capped in Java, you can optionally tune/change how much memory is allocated for it
+>> Stack space us small and generally fixed; you can run out of it if your stack trace gets too deep ("stack overflow")
+>> Not applicable to Java, but in lower-level languages stack buffer overflows exploit behavior of the stack to attack apps ("smashing the stack")
+
+
+**Exceptions**
+>> What happens when the exceptional occurs? Exceptions
+>> Exceptions we've seen: INdexOutOfBoundsException, NullPointerException, IllegalArgument...
+>> Unchecked Exceptions: are used when the programmer has made an error that isn't detectable at compile-time (null is passed when it shouldn't, you cast an object in a class of which it's not an instance, etc)
+>> Checked Exceptions: are used when there is a failure outside the program's control (network failure, padding invalid format, security failure, etc)
+>> In java, the former is called an Unchecked exception, and the latter is called a Checked Exception
+
+>> Exception should not be see as part of the normal control flow. They should be used for the exceptional. 
+>> Each language has its own exception best practice for when to raise (to throw) and exception which later might be caught
+>> Unchecked exceptions are programming errors; they should not be caught
+>> Checked exceptions, in Java, can and should be caught. You use try/catch blocks. 
+>> You can create new kinds of exceptions by subclassing Exception
+
+public void printFile(String filename) throws FileNotFoundException {
+	try {while}
+	catch {throw exception}
+	finally {}
+ }
+
+Best Practices when dealing with exceptions:
+>> Throw Exception early, catch late
+>> When things go wrong, don't catch, log and re-throw. You program should have one logger. Either log or rethrow, don't do both. 
+>> Don't ignore Exceptions
+>> Use Exceptions --> email them automatically, etc. 
+
+**Unit Tests & Test-Driven**
+>> Tell if the code works before the app runs
+>> Java has JUnit, among others
+>> Tests are divided into **Test Suites**, which contain **Test Cases** which each have a number of **assertions**
+>> testable code tends to be modular, reusable code
+
+**Test-Driven Development**
+>> Write test first. Then work on implementation. 
+>> Your model classes are great candidates for this. 
+>> Tests should be trusted, run, maintained (when a bug is found, update your test)
+JUnit uses the @Before (what gets run before test), @test (sequence of test), @After, etc.  
+
+January 6 2013
+# Reservation System Homework
+
+Code Review of my homework 
+>> if you try to cancel a reservation when none have been created it ends the program
+>> more efficient way of iterating over an array
+
+When printing the stuff. Instead of printing each item. Instead, of we added everything in a description at all time, we could always pull the description (it also makes it easier since not all of the reservation systems use all the fields). So you only have one getter instead of all the different getters. 
+
+# OO Design
+
+**Problems of Memory Management**
+
+In C++, every object we create on the heap, we have to create them, and then delete them. It's annoying, you might forget to delete it. Then if you forget, you have this allocated memory that never gets freed up. 
+
+>> "Garbage collection": seeks to automatically delete objects once they're not referenced anymore. 
+>> "Reference counting": simpler way to handle memory. anytime some other object references ab object, increment a counter. when the object is dereferenced, decrement the counter. delete counter when it hits 0. 
+>> Manually. 
+
+Watch out for circular references (when 2 objects are referenced to each other). They'll never leave. It's a bad performance issue. 
+
+CSS would be smarter if it was like that...! 
+
+**Mark & Sweep**
+
+>> Define a tree of all object references
+>> During collection, clear all objects to assume they are unreferenced
+>> Walk through the tree, marking objects currently referenced
+>> Sweet through the tree, releasing any unmarked objects
+
+
+Garbage collector will look at every variable in the _stack_ (like foo()). It goes and marks them. This thing is in use, don't delete. For every of these variable, we look at all of their instance variables and see again if they're referenced or not, etc. 
+Then we have a new tree of what's in use.   
+After it's done that, it goes through the _heap_ and check if anything is in use there. 
+
+The cons is that this Garbage Collection requires that you "stop the world" in order to run. Your application will have to wait. You're scanning through a vast amount of memory to do this.  
+
+Garbage collectors are very complicated (one of the toughest programs to write ever!). 
+
+"Generation Garbage Collection": segments garbage into segments. 
+
+**How Java Does It**
+
+Garbage Collector (GC) cannot be forced. 
+
+finalize() gets called when you're garbage had been collected and is about to get thrown out. 
+
+**How To leak memory in java**
+"Memory Leak" when memory isn't freed up, not allocated correctly, etc. 
+Holding references you don't need will prevent memory from being freed. 
+Don't count just on Garbage Collection. 
+
+**Best Practices**
+http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)
+No cyclic dependencies! 
+
+Single responsibility: each responsibility should be a separate class. 
+Open for extension, closed for modification. classes should strive to be extensible, but not editable, when logic needs to change. 
+Liskov substitution. Class X can be swapped for its subclass Y and the programs still valid. 
+Interface segregation: depends on the smallest interface possible. 
+Dependency inversion: high level modules should not depend on low level modules, they should depend on abstraction. 
+
+- Final: means you can only assign a variable once
+- Finally: when you are catching an exception
+- Finalize(): see above. 
+
+To minimize garbage, create less objects. 
+
+
+January 8
+# Introduction to ordered data structure (ordered lists)
+
+**Arrays Review**
+>> Typically a 1xN, ordered list, can also be multidimensional
+>> no easily  resizable
+>> operations: get/set at index, create with capacity
+>> in java: ArrayList, standard array
+ArrayList<String> list = new ArrayList<String>();
+String[] list = new String [10];
+
+Use ArrayList when you know exactly how big your list is going to be and not changing. The chess game is a perfect example. 
+
+Or if you know something is always stored in the 1, 20th element, array is a great choice. 
+
+**How do we choose which data structure to use?**
+>> What data are we storing? How big will it get?
+>> How are we inserting/deleting data?
+>> How are we querying data?
+>> Other (available memory, etc)
+
+
+# Complexity Analysis
+Introduction to Big-O notation. 
+
+As the size of the problem grows, how does my solution scale?
+
+"Big-O" notation is concerned with worst case. How long does my solution take with worst case situations?
+
+"Big-O" notation ignores constants and things that are fixed. 
+http://en.wikipedia.org/wiki/Big_O_notation
+Here we're taking the example of a phone book... 
+
+O(1): Constant
+ex: access item at an index. 
+
+O(n): Linear. The more the data, the longer it will take. 
+ex: search an unsorted array.
+
+O(logn): Logarithmic. Very efficient. Binary search (divide by 2 and pick the side it is going to be, until you find). 
+ex: search through a sorted array. 
+
+O(nlogn): All the names are unordered. We need to sort. 
+O(n V 2): quadratic. for every name in the phone book, do a linear scan through the phone book to see how many people have the same name. 
+O(2 v n): exponential. you have a set of items, each with a weight and a value. find the maximum value combination still under a certain weight. 
+ 
+
+# Linked Lists
+
+Another ordered data structure. 
+What you can do:
+>> Insert/remove at beginning/end (o(1))
+>> Insert/remove at index n (O(n))
+>> Get at beginning/end (O(1))
+>> Get at index n (O(n))
+
+When would you use a linked list?
+>> Order is important. 
+>> Random access is infrequent. 
+>> space efficiency is critical
+>> Inserts are frequent and the total size of the data is unknown/variable
+
+
+# Stacks
+>> Last in, first out. Always operating on the top. 
+>> The stack is an ordered data structure
+>> Can be implemented with a  LinkedList
+>> Operations: push onto the stack, pop off the stack, peek at the top, get count of items on stack
+>> In java: Stack
+>> Example use-cases: Stack Trace
+
+
+firstNode, can be the latest one added. 
+
+
+# Queues
+First in, first out. 
+>> The queue is an ordered data structure with a small set of operations
+>> Can be implemented with a LinkedList
+>> Operations: Enqueue onto the queue, Dequeue off the queue, Peek at the top of the queue, get count of items on queue
+>> In Java: LinkedList
+>> Example use-cases: Message queue, operation queues. 
+
+// QUESTION: database vs storing data in linked lists, etc. 
+
+Lesson 8 - Jan 13
+**Advanced Data Structures: trees and tree traversals**
+
+Java doesn't have a great tree implementation -- some open source stuff can be found. 
+
+A binary tree has from 0 to 2 child nodes on each branch. 
+Leaf nodes have no children. 
+Trees have a notion of height. Based depth to get to leaf node.
+
+# What is a tree and when are they used?
+>> like linked lists, trees are made pup of nodes which contain values
+>> Binary search tree allows to search faster. The left value is always smaller than the right value. It's still the idea of looking through a phone book and splitting it in two. Traditionally binary search tree: left is always the smaller value, right is the bigger value. 
+>> 
+
+// QUESTION: are trees every used as table like a database? What other type of data do you store in a tree?
+
+# The binary search tree (BST)
+>> Great at dynamically sized data set
+>> Complexity: insert, query, remove are O(long), Space is O(n)
+>> When to use them?
+>> >> Dynamically size data
+>> >> Frequent searches
+>> >> Data changes frequently
+Trees have order, but there are several ways one can walk through a tree. 
+
+A "Breath first search": goes through level by level, left to right.  
+
+TIP: IntelliJ: option + enter to get options. 
+
+
+# Tree traversals
+alternatives to breadth first, "depth first": 
+>> pre-order traversal: node, left, right
+>> in order traversal:left, node, right
+>> post order traversal: left, right, node
+
+in order is the most useful traversal. 
+
+If we try to delete something from the tree that has more that one child, we pick one of the children and replace the thing we want to remove by on of the children. The other child becomes a child of this new parent.
+
+# Heaps and priority queues
+Link lists are just a subset of trees. 
+
+*The Problem With Balance*
+>> Unbalanced trees can cause inconsistent, hard to predict performance
+>> If you have a binary tree and insert values in order, you've essentially created a linked list
+>> Several advanced trees have properties that help maintain balance
+>> Splay trees rebalance on queries, bringing recently-accessed elements to the top / great when query patterns query the most frequently used elements first
+>> Red black trees: all nodes have a color, various rules around node colors that enforce balance (they care about neighbor nodes and child nodes)
+
+These above are fairly complicated algorithms. But they're worth it. 
+
+And finally B-trees:
+>> exploits properties of a binary tree while generalizing it to have more than 2 children nodes
+>> all leaf nodes must have the same level
+>> objective is fast search/insert, which is achieved by minimizing tree height
+>> not self-balancing in the same manner as Splay trees or red/black trees
+>> frequently used in database, filesystem implementation
+
+B trees have ranges in parent nodes. 
+
+
+# Heaps and priority queues
+Keeping track of high scores, most purchased items, etc. 
+
+A binary heap is a binary tree with several properties. 
+
+Priority queue complexity analysis:
+Search (peek is 0(1), space o(n), insert is O(long), remove 0(long). 
+
+The only thing we're doing with these is inserting and de-queuing. We're never searching with priority queue. Only thing you're interested in the highest values. 
+
+>> When you have a never ending stream of scores, and want to print the top 100 
+>> you're pathfinding through a maze?
+>> you have a constantly-changing queue of messages to send, each of which have different priorities?
+>>>> How would you you implement this with a linked list-backed queue?
+>>>> how fast would it be to insert? To dequeue?
+
+Property of the heap:
+>> Completeness: every items has to be filled, and at the bottom (leaf), has to be filled left to right. 
+>> Heap property: every child must be larger than its parent
+
+Insert works by "bubble-up":
+>> Insert each new node at the open position
+>>  If the node is larger than it's parent, swap them until the parent meets the heap property. 
+
+Min-heaps: smallest on top
+Max-heaps: biggest on top
+
+For element at index i:
+>> parent index: (i-1)/2
+>> left child index: (i*2)+2
+>> right-child index: (1*2)+2
+
+The Heap: every node is bigger than its children nodes
+[grab more stuff here from the slides]
+
+
+## Advanced Data Structures: maps, sets & graphs
+
+# Sets
+>> collection of unique objects
+>> usually out of order
+>> values are generally unique. can be implemented with arrays or trees. 
+>> Operations: create/read/update/delete and then specific operations: union (A,B)[entire content of both sets], intersection (A,B) [where they overlap], subset (A,B)[]
+>> Examples: key/value sets in maps
+
+
+# Maps
+
+**What is A map and where are they used?**
+>> Maps are collections of "keys" and "values".
+>> Map data structures let you query, add or remove a value for a unique key. 
+If you log into a website, your customer information might be stored in a map where the key is your customer ID/email address
+>> Maps are generally unordered
+>> Map vocabulary
+			>> A key is typically an object, and is unique among the set of keys
+			>> A value is typically an object, associated with a key. In most map implementations, a key is associated with one value. 
+
+**Hashmap Basic**
+>> in java: TreeMap, HashMap, Hashtable
+>> Hashmap/hashtable: array-backed solution
+>> Array backed solution need to figure out where to put object in their array. This is done with a hash function. 
+>> Array backed solutions can perform operations in O(1), as they use arrays as their backing store
+
+
+Checkout Luhn Algorithm. 
+>> The hash function: A method which takes variable-size input and returns a fixed-size 'hash value'
+>> Hashmap hash methods should evenly distribute objects across their buckets. 
+>> Writing good hash methods is hard. There are very few situations where you will need to write your own. 
+>> HashMaps hash the value, mod the result by the number of buckets, then insert in that position. 
+
+>> What happens when HashMaps get full? The rehash. 
+>> Since arrays are the HashMap's backing store, we must deal with resizing. Performance issue. 
+>> HashMaps allow you to set a capacity on creation, which can minimize rehashes
+
+QUESTION: where does the real value go?
+
+**Strategies for rehashing** 
+>> All at once: create a new array with a bigger capacity, move over everything at once
+>> Incremental: when a resize is needed, create a new HashMap with bigger size. As queries/inserts are done, movie data from the old HashMap into the new one. 
+
+**When a HashMap hash function resolves two different objects to the same bucket, it's called a collision. How would you mitigate this?**
+>> Open addressing: if you hash to a bucket that is already taken, keep looking through the lost until you find an open spot
+>> Chaining: each bucket contains a linked list of keys/value, collisions are resolved by adding the key/value to the linked list
+>> Hybrid solution of the above
+
+
