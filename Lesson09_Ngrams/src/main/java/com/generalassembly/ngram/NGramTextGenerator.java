@@ -16,7 +16,7 @@ public class NGramTextGenerator {
      * The map below uses an ngram (represented by a LinkedList of NGRAM_LENGTH) as the key,
      * and an ArrayList of all words trailing that ngram as the value.
      */
-    private HashMap<LinkedList<String>, ArrayList<String>> ngrams;
+    private HashMap<LinkedList<String>, ArrayList<String>> ngrams;   //
     private LinkedList<String> currentNGram;
     private final Random random;
 
@@ -29,6 +29,8 @@ public class NGramTextGenerator {
         this.random = new Random();
     }
 
+
+
     /**
      * Add a word to the data source we'll generate random text from.
      */
@@ -37,6 +39,7 @@ public class NGramTextGenerator {
         if (currentNGram == null) {
             currentNGram = new LinkedList<String>();
         }
+
 
         currentNGram.addLast(word);
 
@@ -64,11 +67,15 @@ public class NGramTextGenerator {
      * Returns similar looking, but random text of length OUTPUT_WORD_LENGTH given the words added using addWord()
      * @return A string of length OUTPUT_WORD_LENGTH,
      */
+
+
     public String randomText() {
         // Start with random seed text
         LinkedList<String> words = this.randomNGram();
         StringWriter stringWriter = new StringWriter(this.OUTPUT_WORD_COUNT);
         stringWriter.append(ngramStringRepresentation(words));
+
+
 
         for (int i = 0; i < OUTPUT_WORD_COUNT; i++) {
             // Homework TODO: Given the generated map of ngrams and tailing words, generate random-seeming text!
@@ -77,7 +84,23 @@ public class NGramTextGenerator {
             //   to get a random value from it. After that, append that value
             // * If you come across an ngram that doesn't exist in the map, call randomNGram to get a random one
             // * To do all this, you should not need to make changes outside of this method.
-            //
+
+
+            ArrayList<String> newWord = ngrams.get(words);
+            if (newWord!= null) {
+                stringWriter.append(newWord.get(0).toString());
+                stringWriter.append(" ");
+
+                // need to set the new ngram (in "words")
+                words.set(0, words.get(1));
+                words.set(1, newWord.get(0));
+            }
+            else {
+                // if we don't find something a matching value in ngrams, then we pick a random one
+                stringWriter.append(randomText());
+            }
+
+
             // Bonus opportunities (that will require changes to be made outside of this method):
             // * Instead of starting your text with a random ngram, instead start with the first ngram in the sample text you were given.
             // * Make output word length, ngram length user-settable parameters
