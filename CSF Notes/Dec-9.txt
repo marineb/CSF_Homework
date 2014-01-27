@@ -653,5 +653,51 @@ QUESTION: where does the real value go?
 >> Hybrid solution of the above
 
 
- January 22
+January 22 2013
 
+# Algorithms. 
+
+Data structures reviews
+>> Arrays
+>> Binary Search Trees
+>> Hash Tables
+
+Big Oh is really important. 
+OMEGA(1)  -- to insert anything http://en.wikipedia.org/wiki/Big_O_notation#Big_Omega_notation
+
+**Greedy Algorithms**
+Seek to make a locally optimal choice at each stage. Coin example. 
+They have:
+>> A set of things to choose from
+>> A notion of 'the best' among the set
+>> A notion of feasibility within the set (what is that??)
+>> An end state
+
+Greedy algorithms will usually come up with a solution. But it is usually not the best solution. 
+>> They are short-sighted
+>> They are also non-recoverable
+
+But...
+>> They are frequently simple and fast, which has its own advantages. 
+
+# Memoization
+
+Trading speed for space. 
+
+Fibonnacci number is defined by:
+F(n) = F(n-1) + F(n-2)
+The first 2 fibonnacci numbers are 0 and 1. The next number is the sum of the previous 2 numbers. Easy. 
+
+We start with the beginning, cache the previously calculated values and then keep calculating stuff. 
+
+# Introducing JavaDoc
+That adds comments. 
+
+
+
+
+
+
+else {
+                
+            }
