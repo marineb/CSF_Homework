@@ -690,14 +690,114 @@ The first 2 fibonnacci numbers are 0 and 1. The next number is the sum of the pr
 
 We start with the beginning, cache the previously calculated values and then keep calculating stuff. 
 
+
 # Introducing JavaDoc
 That adds comments. 
 
 
+January 27 2013
+
+# Remembering the Big(O) Notation: 
+It takes constant time to insert something into the hash map: O(1) because you:
+>> look at the thing you need to insert. 
+>> look at the hash index where you need to insert it. 
+>> and look at the length of the array.
+
+A good hash function needs to spread things well through the hashmap/hashtable. 
+
+If a BST is perfectly balanced, search through it is: log(n). 
+
+Searching through an unbalanced tree or a linked list, it's O(n). 
+
+
+# Algorithms, Part II
+Today, we'll learn about recursion. 
+
+What is a recursive method?
+A thing that calls itself. It's self referential. 
+
+For instance:
+Fib(n) = Fib (n-1) + Fib (n-2). 
+
+public void recurse() {
+		recurse();
+}
+
+This above will crash the program (recurse()). It will keep adding itself to the stack until there's no more room (--> "stack overflow"). 
+
+
+Always start by defining the base cases in recursive functions. 
+
+Use helper recursive methods to make code prettier [http://web.presby.edu/~phmeeker/classes/pc/CSC242/notes/ch13/Recursion%20Continued.htm]
+
+
+Recursive with nodes. Start with the bases. 
+1. See if node is null. if not, 
+2. print the value of the node
+3. recursive print left
+recursivePrint(n.right)
+
+That's in order traversal (NLR). 
+Then pre order traversal (LRN) would be:
+1. See if node is null. if not, 
+2. recursive print left
+3. print the value of the node
+4. recursivePrint(n.right)
+
+Then if order is post traversal. 
+
+1. See if node is null. if not, 
+2.
+
+# Graphs
+Graph data structures can model complex relationships. 
+>> One to one: your relationship to your SSN
+>> one to many: a mother/father's relationship to their children
+>> many to many: grocery stores and the products they carry
+
+Graphs are made up of Nodes and Edges. 
+>> nodes represent the values in the graph. 
+>> edges represent the connections between nodes
+>> multiple ways to store these relationships
+
+
+Twitter "edges" are "directed" (if I follow you, you don't necessarily follow me). Unlike with Facebook for instance, where they're undirected. 
+
+Graphs can be directed or undirected. 
+
+Trees can be thought of as a special type of directed graph. 
+
+**Edges can optionally store data.**
+>> Twitter's notion of follower might not store edge data. 
+>> LinkedIn's notion of connection does store edge data
+
+**Weighted VS Unweighted.** You can apply a weight to edges. This will add some length to traverse it. 
+>> are some paths (edges) more expensive than others? i.e.: Facebook knows you're closer to some friends, some road have speed limits, etc.
+
+**Simple V.S. Not Simple**
+>> A simple graph is undirected and has no duplicate edges, no loops back into itself. 
+
+**Sparse / Dense**
+Facebook and Twitter probably very sparse. Even the most popular person on Facebook is unlikely to be friend with all users of Facebook.
+
+In a sparse graph, there are fewer edges between nodes. 
+
+**Cyclic / Acyclic.**
+Trees are directed acyclic graphs. There are no loops, only one direction.
+With a Cyclic graph, you have to worry about marking each node you've visited. 
+
+**Embedded / Topological** 
+embedded graphs have geographic/physical position associated with them. 
+
+**Implicit/Explicit**
+
+**Labeled/Unlabeled**
+Facebook friends (nodes) have labels. 
+
+
+Directed Acyclical Graph: comes up in scheduling problems, where vertices must occur in a specify order. 
+
+# Traversal: breadth first search (BFS)
 
 
 
-
-else {
-                
-            }
