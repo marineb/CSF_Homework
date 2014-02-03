@@ -15,6 +15,47 @@ public class Search {
          as you search, or perform the search without ever copying the array.
          Start with the former, then try for the latter.
          */
-        throw new NotImplementedException();
+
+        if (array.length == 0) {
+            return false;
+        }
+
+        else if (array.length == 1 && searchTerm!= array[0]) {
+            return false;
+        }
+
+
+        else if (array.length == 1 && searchTerm == array[0]) {
+            return true;
+        }
+
+        else if (searchTerm == array[array.length/2]) {
+            return true;
+        }
+
+        else if (array.length == 0) {
+            return false;
+        }
+
+        else {
+
+            if (array[array.length/2] > searchTerm) {
+                int left[] = Arrays.copyOfRange(array, 0, array.length/2);
+                return binarySearch(left, searchTerm);
+                // above line: style improvement, allows not to have an if statement that evaluates if it returns true or false;
+            }
+
+            else if (array[array.length/2] <= searchTerm) {
+
+                int right[] = Arrays.copyOfRange(array, array.length/2, array.length);
+
+                return binarySearch(right, searchTerm);
+            }
+
+        }
+
+        return false;
+
+        //throw new NotImplementedException();
     }
 }

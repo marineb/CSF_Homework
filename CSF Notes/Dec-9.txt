@@ -800,4 +800,57 @@ Directed Acyclical Graph: comes up in scheduling problems, where vertices must o
 # Traversal: breadth first search (BFS)
 
 
+## Algorithms PART 3
+Goals for today. 
+- Understand "divide and conquer" approaches, and apply this to searching and sorting. 
+- Compare and contrast different searching and sorting techniques. 
+
+# Divide and Conquer
+- Split data up and perform some recurrence relation on it (i.e.: searching, sorting). this can make things very fast. 
+- Good for parallelizing a problem.
+
+# Binary Search: Divide & Conquer a search problem
+- sort an array of data
+- split the array in half
+- choose the half of your desired value would be in 
+- recurse into looking at the halves of that half until you find your value
+
+Binary search is log(n). 
+
+Binary search useful for searching area. Useful on searching on arrays. 
+Revise breath first search and depth first search. 
+There are many more algorithms to look into. 
+- Dijkstra's algorithm for instance. 
+
+
+# Insertion Sort
+- insert each element into an array that holds the sorted values, stepping through each element in the sorted array until you find the right place to insert your new value. 
+- 0(n^2)
+- horrible performance, but simple and actually not bad for small amounts of data in practice 
+- watch it in action http://en.wikipedia.org/wiki/Insertion_sort 
+- to insert sort, empty the current location, is it bigger or smaller than the previous value? if smaller, we swap the 2 values. 
+
+# Mergesort
+How would you sort a trillion numbers?
+- Mergesort
+- O(n log n)
+
+To merge 2 sorted arrays together, you step through each index of arrays compare them and the smallest of the 2 becomes the next on the new array. This is O(n). 
+
+Merge sort breaks one array into tiny arrays (of one). Then build from there. By merging single arrays into double, into triples, etc. 
+
+This is a classic "divide & conquer". 
+
+Insertion Sort and Merge Sort are divide and conquer. This allows to sort without having to create a bunch of new arrays. 
+
+# Heapsort
+- Build up a priority queue from the input, then pluck off the minimum values from that heap one at a time. 
+- O(n log n) As good as you can get, but you need to be able to fit everything in memory. 
+- Wikipedia: HeapSort
+
+# Selection Sort
+
+# Quick Sort
+
+# Intro Sort, etc etc. A billion sort algorithms to look up....
 
