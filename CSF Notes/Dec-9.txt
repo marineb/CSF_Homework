@@ -854,3 +854,38 @@ Insertion Sort and Merge Sort are divide and conquer. This allows to sort withou
 
 # Intro Sort, etc etc. A billion sort algorithms to look up....
 
+
+monday feb 3 2014
+## Design Patterns
+- learn the model / view /controller design pattern and when it is applied
+- learn and apply other common software design pattern
+- check out books about design patterns. 
+
+# Factory Method Pattern
+The logic for distribution is contained within the class. You call the factory method which returns a randomly configured vehicle (with the example of a factory that creates new cars, the color is based on random and a set range). There's a method specifically used to create new objects. 
+
+Definition: "Static method on a class that returns a new instance of an object". 
+
+It's different than a constructors and we might want to use this instead of it in the following instances:
+- when we don't want to expose the inner workings to the "caller"
+- in the case that we have one or multiple types of common configurations for a new object. then you use that in addition to a constructor. it gives more flexibility. 
+
+http://en.wikipedia.org/wiki/Factory_method_pattern
+
+# Singleton Patterns
+
+A singleton is a class that enforces that there's only one instance of an object. 
+
+Example. Mobile app. You want to track analytics of the device. There should only be ONE "device", obviously. Or it could be with "current user" for identity. 
+
+Criteria for using singletons:
+- every application that we can imagine will use this class in the exact same way. so a logger for instance. 
+
+the one problem with singletons, they have to be both readable and writeable. this can create crazy collisions (it needs to be accessed by several apps possibly). [remember the best practice that classes should when possible only be readable]. 
+
+There are tons of other design patterns. 
+
+# Abstract Factory
+
+Breaking down the making. You have an abstract factory that creates the vehicle and then you have a concrete factory that creates vehicle that are automatic, then another concrete factory that creates smaller vehicles. etc etc. 
+

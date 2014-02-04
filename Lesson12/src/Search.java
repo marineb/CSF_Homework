@@ -3,6 +3,9 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.Arrays;
 
 public class Search {
+    private Search() {
+        super();
+    }
 
     /**
      * @param array A sorted array of ints to search through. This must be sorted.
@@ -15,47 +18,48 @@ public class Search {
          as you search, or perform the search without ever copying the array.
          Start with the former, then try for the latter.
          */
+        // Instructor sample soln below
+        return binarySearchWithoutCopy(array, searchTerm);
+        //return binarySearchWithCopy(array, searchTerm);
+    }
 
-        if (array.length == 0) {
+    private static boolean binarySearchWithCopy(int[] array, int searchTerm) {
+        if (array.length == 0)
             return false;
-        }
 
-        else if (array.length == 1 && searchTerm!= array[0]) {
-            return false;
-        }
-
-
-        else if (array.length == 1 && searchTerm == array[0]) {
+        int middle = array[array.length/2];
+        if (searchTerm == middle)
             return true;
+        else if (searchTerm < middle) {
+            return binarySearch(Arrays.copyOfRange(array, 0, array.length/2), searchTerm);
         }
-
-        else if (searchTerm == array[array.length/2]) {
-            return true;
+        else { // Greater than
+            return binarySearch(Arrays.copyOfRange(array, array.length/2 + 1, array.length), searchTerm);
         }
+    }
 
-        else if (array.length == 0) {
+    private static boolean binarySearchWithoutCopy(int[] array, int searchTerm) {
+        return binarySearchRecursive(array, searchTerm, 0, array.length);
+    }
+
+    private static boolean binarySearchRecursive(int[] array,
+                                                 int searchTerm,
+                                                 int rangeBegin,
+                                                 int rangeEnd) {
+        if (rangeBegin == rangeEnd)
             return false;
+
+        int rangeSize = rangeEnd - rangeBegin;
+        int middleIndex = (rangeBegin + rangeEnd)/2;
+        int middleValue = array[middleIndex];
+
+        if (searchTerm == middleValue)
+            return true;
+        else if (searchTerm < middleValue) {
+            return binarySearchRecursive(array, searchTerm, rangeBegin, middleIndex);
         }
-
-        else {
-
-            if (array[array.length/2] > searchTerm) {
-                int left[] = Arrays.copyOfRange(array, 0, array.length/2);
-                return binarySearch(left, searchTerm);
-                // above line: style improvement, allows not to have an if statement that evaluates if it returns true or false;
-            }
-
-            else if (array[array.length/2] <= searchTerm) {
-
-                int right[] = Arrays.copyOfRange(array, array.length/2, array.length);
-
-                return binarySearch(right, searchTerm);
-            }
-
+        else { // Greater than
+            return binarySearchRecursive(array, searchTerm, middleIndex + 1, rangeEnd);
         }
-
-        return false;
-
-        //throw new NotImplementedException();
     }
 }
