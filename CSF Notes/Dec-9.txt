@@ -889,3 +889,217 @@ There are tons of other design patterns.
 
 Breaking down the making. You have an abstract factory that creates the vehicle and then you have a concrete factory that creates vehicle that are automatic, then another concrete factory that creates smaller vehicles. etc etc. 
 
+# Composite Pattern
+This is a structural design pattern. 
+
+When we want the user of this class to be able to operate on one instance the exact same way as they would operate on a bunch of these things. An example of this is when we're talking about view hierarchy. 
+
+Interface View {
+		void draw();
+}
+
+Class button implements View {
+		void draw() { print('button!")}
+}
+
+Class CompositeView implements View {
+		List<View> views;
+		void add(view v) {...}
+		void remove(view v) {...}
+		void draw() {
+				for (View v in views) {
+						v.draw();
+				}
+		}
+}
+
+
+See example below. Why is this powerful?
+You can do:
+
+View v2 = new Button();
+View v = new Button();
+CompositeView c = new CompositeView();
+// we can add these 2 buttons to composite
+c.add(v);
+c.add(v2);
+c.draw();
+//then draw will loop through all of its children. 
+// we can also do that below instead of c.draw();
+CompositeView c2 = new CompositeView();
+// another composite view
+c2.add(newButton());
+c2.add(c); 
+// above we're adding the composite to the composite 
+// therefore you're adding the first buttons to the second view
+// then you draw the second composite view
+c2.draw();
+
+
+# Decorator Pattern
+Works similarly to the composite pattern. The decorators replace the composite patterns. The decorators take one component. The implementation looks like this:
+
+Interface View {
+		void draw();
+}
+
+Class Button {
+		void draw() {print('button');}
+}
+
+Class BordoredView implements View {
+		public BordoredView(view v) {
+				this.view v;
+		}
+		void draw() {
+				print('Border');
+				this.v.print();
+		}
+		// because this thing is also a view, it has to define the 
+		//	draw method
+}
+
+and the code would go as is:
+Button v = new Button();
+BorderView border = new BorderedView(b);
+border.draw();
+
+you might have scroll bars you want to decorate; a whole bunch of other things you might want to decorate with a border.  so you can just reuse this class, to do that. 
+
+These decorators can be stacked. You can pass a border decorator and a highlight color decorator for instance, etc etc. 
+
+
+# Lazy Initialization
+Only incur expensive initialization of an object the first time it is actually used. 
+It's widely used for Singletons. 
+
+# Object Pool
+You're writing a mobile app. User are jaming on the screen with 10 fingers or something. If every single one of those fingers tap spins up a network request, your phone will crash and die. Even on a computer. If you make a bijilion network request, same result. So we use an object pool. Used a lot of the time when you have hardware bottlenecks that you need to overcome. Say the hardware you have can only handle so many X at one time. 
+- create a collection of objects of a fixed or maximum size to use. it's like a queue. 
+- objects ar recycled, requests for new objects potentially delayed or denied if the pool is full. 
+- useful for objects with high initialization or destruction overhead. 
+- example: threads, connections.  
+
+# Command Pattern
+This is a behavioral pattern concerned with communication between objects. 
+
+# Iterator Pattern
+An iterator encapsulates into a class. see below. Would you that instead of a for loop statement. It's useful because:
+- if your array size is shrinking
+- we can change the order 
+
+
+void printArrayList(ArrayList al) {
+	Iteraor itr = al.iterator();
+	while (itr.hasNext()) {
+			Object element = itr.next();
+			System.out.println(element+ " ");
+	}
+}
+
+// this below actually uses the iterator. So it's better than a classic for loop. 
+for (Object o: list) {
+		System.out.println(o);
+}
+
+
+# Model View Controller Pattern (MVC)
+
+- The model is the logic of the application - its data and the methods that can modify it. "Business logic" lives here. 
+- The view is the UI Layer; the code that presents the model to the end user (the html, the css, etc)
+- The controllers are the glue. they sit in between the view and the model, taking user input from the view and issuing commands to the model.centralizes all access to the model. 
+
+
+**Rails** is based on mvc frame work. built on ruby. it has folders where you put your models, controllers and views. It actually looks for them. You want to stick with the MVC architecture. 
+All the controller does is root. 
+It has some superclasses for your models, views, controllers which all have methods set for them. Inheriting behaviors for them.
+A lot of web technology lands itself really well to MVC since a lot of it is HTML/css. 
+
+**iOS** has much fewer conventions in terms of where you put your views, controllers and models (than rails). They have views you can configure in a graphic way, they have view controllers that contain a bunch of different views. and models, if you're sticking with something conventional. models and views are defined using this GUIish construct. in code, what you have to implement are the codes. in iOS, it starts with controllers which, then models, then views. 
+
+**MVC Frameworks** Ruby, Java Spring, Struts, ASP.NET MVC, cakePHP, Backbone.js, and many more. 
+
+**MVC Tradeoffs**
+- initial development may take longer but...
+- easier to maintain and expand
+- visual redesigns easier to do (since view is isolated)
+- changes to data schema or storage easy to do (since controller is isolated)
+- fewer interdependencies in the codebase
+- testing is easier
+
+
+**First milestone for homework**
+complete the stories and tasks we need to do. 
+
+
+Monday February 10th - Lesson 14
+
+# Concurrency
+
+Today's Objectives
+- Write concurrent, multi-threaded code safely
+- Apply concurrency design patterns to multi-threaded problems
+- Apply judicious use of logging  using log4j
+- Test the performance and stress handling of applications using perf4j, JMETER
+
+There can be different stacks if you're running different processes at one time. But the heap, statics and code are shared, there's only one of them:
+thread		thread			thread
+STACKS		STACK			STACKS
+					HEAP
+					STATICS
+					CODE
+-------------------------------ALL OF THIS ABOVE IS THE PROCESS
+
+5 philosophers can either eat or think. Only 5 forks at the table. need a fork in the left hand and the right to eat. 
+- if they pick up a left fork at the same time, this is a **deadlock**. they get each other in a state that they can never recover. every body is waiting for each other to act. 
+
+Techniques for no deadlock:
+- We could make this non-concurrent
+- Introduce timing delays so each don't conflict
+- Give philosophers the knowledge of what's happening 
+- Give a numeric ordering
+- Introduce an indépendant arbitrer that decides when people should eat
+
+## Intro to multi-threaded programming
+- Take advantage of multiple CPU or GPU cores
+- processes: cannot directly access data from other processes
+- threads: have their own stack, share data between threads in the same process. 
+
+Synchronous if we don't advance until the previous method is done. 
+Asynchronous starts treads. 
+
+Everything we've been doing up to this point has been synchronous. 
+
+## Concurrency Patterns
+
+- Thread pool: create a pool of re-usable threads and a queue of tasks. 6 threads available to you. As new threads are available you add a new task in them. This makes it easier to manage the complexity. 
+- Monitor pattern: Mutexes:  one thread can enter this method at a time. if some other thread comes in, it will block until the other moves. if thread b calls the method, until thread a is done, thread b will wait. synchronized means ply one thread can enter one method at one time. 
+- Concurrency bugs suck, to avoid, minimize the amount of shared writable state between concurrent operations. 
+- semaphored: ensured only n threads will access a resource at a oven time by keeping count of them. see java.util.concurrent.Semaphore
+
+Volatile Keyword. Keyword hint that says, get multiple threads are going to change this at the same time. 
+
+## Logging
+log4j not really related to concurrency stuff. loggers have 3 core objects:
+- logger (logger.info etc etc) - instead of system.out.print. 
+- layout: the view of the logger
+- appender: spits out the log file in the console, sends it via email, throw it on a while. 
+
+Logs are really helpful. Something broke at 5am, you want to be able to backtrack and see what happened. 
+Loggers help differentiate between error messages, between everything. 
+
+It's super easy to configure. Definitely want to use it with 
+
+- avoid log spam
+- don't misclassify your messages
+- rotate old logs off (clear after a week, a month, depends on your app)
+- make error types uniquely identifiable
+- automatically alert someone when fatals or error occur (most important)
+
+There are lots of tools out there to send you text messages, email based on your logs. 
+
+# Performance testing
+perf4j
+create an object, run some code, stops the object. 
+super easy to use. use it. 
+
